@@ -1,0 +1,164 @@
+# February 13, 2024
+# Talal Hussain
+
+import random
+
+# Main list to store User Data
+listmain = [[] for i in range(20)]
+
+street_names = [
+    "Maple", "Elm",
+    "Oak", "Main",
+    "First", "Second",
+    "Third", "Pine",
+    "Cedar", "Spruce",
+    "Chestnut", "Birch",
+    "Walnut", "Locust",
+    "Sycamore", "Willow",
+    "Cherry", "Aspen",
+    "Hickory", "Juniper",
+    "Magnolia", "Poplar",
+    "Redwood", "Cypress",
+    "Dogwood", "Linden",
+    "Mulberry", "Cottonwood",
+    "Alder", "Beech",
+    "Fir", "Grove",
+    "Hazel", "Ivy",
+    "Jasmine", "Kingsway",
+    "Laurel", "Meadow",
+    "Noble", "Orchard",
+    "Parkside", "Quail",
+    "Ridge", "Sunset",
+    "Tulip","Vine",
+    "Windsor", "Yarrow"
+]
+
+street_types = [
+    "Street", "Avenue",
+    "Road", "Lane",
+    "Drive", "Boulevard",
+    "Court", "Place",
+    "Circle", "Way"
+]
+
+usernames = [
+    "user123", "coolcat",
+    "happy123", "sunshine",
+    "butterfly", "sparkle",
+    "rainbow", "awesome",
+    "soccerfan", "musiclover",
+    "gamer123", "traveler",
+    "bookworm", "techgeek",
+    "foodie", "fitnessfan",
+    "adventure", "dreamer",
+    "artlover", "nature",
+    "starwars", "superhero",
+    "wizard", "ninja",
+    "unicorn", "mermaid",
+    "dragon", "wizard",
+    "spaceexplorer","skywalker"
+]
+
+password = []
+birthdate = []
+address = []
+ssn = []
+products = [
+    "T-shirt", "Jeans",
+    "Sneakers", "Dress",
+    "Sweater", "Jacket",
+    "Hat", "Scarf",
+    "Gloves", "Backpack",
+    "Watch", "Sunglasses",
+    "Phone case", "Headphones",
+    "Laptop", "Tablet",
+    "Camera", "Water bottle",
+    "Umbrella", "Wallet"
+]
+salesperson = [
+    "Michael", "Emily",
+    "David", "Sarah",
+    "Chris", "Anna",
+    "Alex", "Jessica",
+    "Matt", "Emma",
+    "Daniel", "Rachel",
+    "Andrew", "Jennifer",
+    "Ryan", "Nicole",
+    "Kevin", "Stephanie",
+    "Brian", "Melissa"
+]
+
+# Randomly Generate an Address
+for o in range(20):
+    
+    addnum = random.randint(1, 9999)
+    addname = random.choice(street_names)
+    addtype = random.choice(street_types)
+
+    addy = str(addnum) + " " + addname + " " + addtype
+
+    address.append(addy)
+
+# Randomly generate a Social Security Number
+for i in range(20):
+    ssn.append(random.randint(100000000, 999999999))
+
+# Randomly generate a password
+for p in range(20):
+    pwd = ""
+    pwdlen = random.randint(8, 15)
+    for i in range(pwdlen):
+        num = random.randint(0, 9)
+        letter = "abcdefghijklmnopqrstuvwxyz"
+        let = random.choice(letter)
+        choice = [str(num), let]
+        gen = random.choice(choice)
+        pwd = pwd + gen
+    password.append(pwd)
+
+# Randomly generate a birthdate
+for b in range(20):
+    day = random.randint(1, 31)
+    month = random.randint(1, 12)
+    year = random.randint(1950, 2006)
+    bd = str(month) + "/" + str(day) + "/" + str(year)
+    birthdate.append(bd)
+
+for l in range(20):
+    listmain[l].append(random.choice(usernames))
+    listmain[l].append(random.choice(password))
+    listmain[l].append(random.choice(birthdate))
+    listmain[l].append(random.choice(address))
+    listmain[l].append(random.choice(ssn))
+    listmain[l].append(random.choice(products))
+    listmain[l].append(random.choice(salesperson))
+
+# A dictionary to store User ID and order list
+user_data = {}
+
+for kv in range(20):
+    k = "Uid" + str(kv)
+    user_data[k] = listmain[kv]
+
+# for m in user_data:
+#     print(m, user_data[m])
+
+def search_user_data(query, data):
+  results = {}
+  for key, value in data.items():
+      for item in value:
+          if query.lower() in str(item).lower():
+              results[key] = value
+              break
+  return results
+
+search_query = input("Search: ")
+search_results = search_user_data(search_query, user_data)
+
+print("Search Results:")
+for key, value in search_results.items():
+    print(key, value)
+
+
+# Finished February 13, 2024
+# Talal Hussain

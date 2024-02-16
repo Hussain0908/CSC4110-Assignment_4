@@ -1,0 +1,49 @@
+# February 13, 2024
+# Talal Hussain
+
+import random
+import string 
+
+accepted_pwd = []
+symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?"
+
+# A function to generate a random password
+def generate():
+    gen_pwd = ""
+    all_char = string.ascii_letters + string.digits + symbols
+    r = random.randint(6, 15)
+    for i in range(r):
+        gen_pwd = gen_pwd + random.choice(all_char)
+
+    return gen_pwd
+
+# This function checks if the password created is acceptable
+def acceptable(password):
+    dic = ['password', '123456', 'qwerty', 'admin', '123456789']
+    if any(word in password for word in dic):
+        return False
+    if not any(char in string.punctuation for char in password):
+        return False
+    return True
+    
+
+accepted_passwords = []
+
+# Loop to go through 40 passwords to see if they are acceptable
+iterations = 0
+while iterations < 40:
+    password = generate()
+    if acceptable(password):
+        accepted_passwords.append(password)
+        iterations += 1
+    else:
+        del password
+
+# After printing all passwords that were accepted
+print("Accepted passwords:")
+for password in accepted_passwords:
+    print(password)
+
+
+# Finished February 14, 2024
+# Talal Hussain

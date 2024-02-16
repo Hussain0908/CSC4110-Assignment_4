@@ -1,0 +1,54 @@
+# February 13, 2024
+# Talal Hussain
+
+import random
+
+class PiratePlunder:
+    def __init__(self, initial_bank=100):
+
+        # A bank to store the users money
+        self.bank = initial_bank
+        # A Chest with items
+        self.treasure_chest = ['gold coin', 'ruby', 'skull', 'poison', 'empty bag']
+    
+    def spin(self, wager):
+        # A Check to see if the user has enough
+        if wager > self.bank:
+            print("You don't have enough gold coins to make that wager!")
+            return
+        
+        outcome = random.choice(self.treasure_chest)
+        print("You spun the wheel and grabbed a", outcome)
+        
+        # Statements based on which item is grabbed
+        if outcome == 'gold coin':
+            self.bank += wager
+            print(f"You won {wager} gold coins!")
+        elif outcome == 'ruby':
+            self.bank += wager
+            print(f"You got a ruby worth {wager}")
+        elif outcome == 'empty bag':
+            print("Nothing happened")
+        else:
+            self.bank -= wager
+            print("Better luck next time!")
+
+    def play(self):
+        while self.bank > 0:
+            # Showing current balance before you play
+            print("\nCurrent bank balance:", self.bank)
+            wager = int(input("Enter your wager (or 0 to quit): "))
+            # If bank goes to 0 then its game over
+            if wager == 0:
+                print("Thanks for playing Pirate's Plunder!")
+                break
+            self.spin(wager)
+        else:
+            print("You're out of gold coins! Game over!")
+
+if __name__ == "__main__":
+    game = PiratePlunder()
+    game.play()
+
+# Finished February 13, 2024
+# Talal Hussain
