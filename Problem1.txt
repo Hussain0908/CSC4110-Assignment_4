@@ -3,7 +3,6 @@
 
 import random
 
-# Main list to store User Data
 listmain = [[] for i in range(20)]
 
 street_names = [
@@ -29,7 +28,7 @@ street_names = [
     "Noble", "Orchard",
     "Parkside", "Quail",
     "Ridge", "Sunset",
-    "Tulip","Vine",
+    "Tulip", "Vine",
     "Windsor", "Yarrow"
 ]
 
@@ -56,7 +55,7 @@ usernames = [
     "wizard", "ninja",
     "unicorn", "mermaid",
     "dragon", "wizard",
-    "spaceexplorer","skywalker"
+    "spaceexplorer", "skywalker"
 ]
 
 password = []
@@ -88,15 +87,15 @@ salesperson = [
     "Brian", "Melissa"
 ]
 
+# Define ProductPurchased prefix
+product_prefix = "ID-"
+
 # Randomly Generate an Address
 for o in range(20):
-    
     addnum = random.randint(1, 9999)
     addname = random.choice(street_names)
     addtype = random.choice(street_types)
-
     addy = str(addnum) + " " + addname + " " + addtype
-
     address.append(addy)
 
 # Randomly generate a Social Security Number
@@ -133,24 +132,29 @@ for l in range(20):
     listmain[l].append(random.choice(products))
     listmain[l].append(random.choice(salesperson))
 
-# A dictionary to store User ID and order list
-user_data = {}
+# Generate ProductPurchased data
+product_purchased = {}
+for l in range(20):
+    product_purchased["ID-" + str(l)] = {
+        "OrderID": "Order" + str(l),
+        "Vendor": random.choice(usernames),
+        "ProductID": "ID-" + str(random.randint(0, 19)),
+        "Quantity": random.randint(1, 10),
+        "DateOfOrder": random.randint(1, 31),
+        "Region": random.choice(["North", "South", "East", "West"])
+    }
 
-for kv in range(20):
-    k = "Uid" + str(kv)
-    user_data[k] = listmain[kv]
-
-# for m in user_data:
-#     print(m, user_data[m])
+# Combine user data with product purchased data
+user_data = {key: (listmain[i], product_purchased[key]) for i, key in enumerate(product_purchased)}
 
 def search_user_data(query, data):
-  results = {}
-  for key, value in data.items():
-      for item in value:
-          if query.lower() in str(item).lower():
-              results[key] = value
-              break
-  return results
+    results = {}
+    for key, (user_info, product_info) in data.items():
+        for item in user_info + list(product_info.values()):
+            if query.lower() in str(item).lower():
+                results[key] = user_info + [f"{key}: {value}" for key, value in product_info.items()]
+                break
+    return results
 
 search_query = input("Search: ")
 search_results = search_user_data(search_query, user_data)
@@ -158,6 +162,7 @@ search_results = search_user_data(search_query, user_data)
 print("Search Results:")
 for key, value in search_results.items():
     print(key, value)
+
 
 
 # Finished February 13, 2024
